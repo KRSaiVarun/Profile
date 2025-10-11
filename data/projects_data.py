@@ -5,6 +5,7 @@ def get_projects_data():
             "title": "DataInsightHub",
             "description": "Excel & Power BI Dashboard with automated analysis & AI-driven insights for comprehensive data visualization and business intelligence.",
             "technologies": ["Excel", "Power BI", "Python", "AI/ML"],
+            "category": "Data Analytics",
             "github_link": "https://github.com/KRSaiVarun/DatainsightHub",
             "live_link": None
         },
@@ -12,6 +13,7 @@ def get_projects_data():
             "title": "Vayu Vihar",
             "description": "Real-time helicopter booking web application with interactive booking system, payment integration, and flight tracking.",
             "technologies": ["React", "Node.js", "MongoDB", "Express"],
+            "category": "Web Application",
             "github_link": "https://github.com/krsaivarun/vayu-vihar",
             "live_link": None
         },
@@ -19,6 +21,7 @@ def get_projects_data():
             "title": "FlaskBlog",
             "description": "CRUD blog application built with Flask and SQLite, featuring user authentication, post management, and responsive design.",
             "technologies": ["Flask", "SQLite", "HTML", "CSS", "JavaScript"],
+            "category": "Web Application",
             "github_link": "https://github.com/krsaivarun/flaskblog",
             "live_link": None
         },
@@ -26,6 +29,7 @@ def get_projects_data():
             "title": "CyberScan-Pro",
             "description": "Python-based vulnerability scanner using Nmap & OSINT APIs for comprehensive network security assessment.",
             "technologies": ["Python", "Nmap", "APIs", "Cybersecurity"],
+            "category": "Security Tool",
             "github_link": "https://github.com/krsaivarun/cyberscan-pro",
             "live_link": None
         },
@@ -33,6 +37,7 @@ def get_projects_data():
             "title": "LoanGuardian-AI",
             "description": "Machine learning-powered loan default prediction application built with Streamlit for financial risk assessment.",
             "technologies": ["Python", "Streamlit", "Scikit-learn", "Pandas"],
+            "category": "AI/ML",
             "github_link": "https://github.com/krsaivarun/loanguardian-ai",
             "live_link": None
         },
@@ -40,6 +45,7 @@ def get_projects_data():
             "title": "DataInsight Hub Pro",
             "description": "Advanced React dashboard with Chart.js integration and smooth animations for enhanced data visualization experience.",
             "technologies": ["React", "Chart.js", "JavaScript", "CSS"],
+            "category": "Data Analytics",
             "github_link": "https://github.com/krsaivarun/datainsight-hub-pro",
             "live_link": None
         },
@@ -47,6 +53,7 @@ def get_projects_data():
             "title": "QR Code Generator",
             "description": "Simple and efficient QR code generator with customization options and bulk generation capabilities.",
             "technologies": ["Python", "QR Library", "Tkinter"],
+            "category": "Utility Tool",
             "github_link": "https://github.com/krsaivarun/qr-generator",
             "live_link": None
         },
@@ -54,6 +61,7 @@ def get_projects_data():
             "title": "Weather App",
             "description": "Real-time weather application with location-based forecasting and interactive weather maps.",
             "technologies": ["JavaScript", "Weather API", "HTML", "CSS"],
+            "category": "Web Application",
             "github_link": "https://github.com/krsaivarun/weather-app",
             "live_link": None
         },
@@ -61,6 +69,7 @@ def get_projects_data():
             "title": "Travel Manager",
             "description": "Comprehensive travel planning and management application with itinerary creation and expense tracking.",
             "technologies": ["Python", "Flask", "SQLite", "Bootstrap"],
+            "category": "Web Application",
             "github_link": "https://github.com/krsaivarun/travel-manager",
             "live_link": None
         }

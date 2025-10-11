@@ -276,30 +276,102 @@ def show_projects():
     
     projects = get_projects_data()
     
-    # Create project cards
+    # Get all unique technologies and categories
+    all_technologies = set()
+    all_categories = set()
     for project in projects:
-        with st.container():
-            st.markdown(f'<div class="project-card">', unsafe_allow_html=True)
-            
-            col1, col2 = st.columns([3, 1])
-            
-            with col1:
-                st.markdown(f"### {project['title']}")
-                st.markdown(project['description'])
+        all_technologies.update(project['technologies'])
+        all_categories.add(project['category'])
+    all_technologies = sorted(list(all_technologies))
+    all_categories = sorted(list(all_categories))
+    
+    # Initialize session state for filters if not exists
+    if 'selected_techs' not in st.session_state:
+        st.session_state.selected_techs = []
+    if 'selected_category' not in st.session_state:
+        st.session_state.selected_category = "All"
+    
+    # Filtering controls
+    col1, col2, col3 = st.columns([2, 2, 1])
+    
+    with col1:
+        selected_techs = st.multiselect(
+            "Filter by Technology:",
+            all_technologies,
+            default=st.session_state.selected_techs,
+            key="tech_filter",
+            placeholder="Select technologies..."
+        )
+        st.session_state.selected_techs = selected_techs
+    
+    with col2:
+        category_options = ["All"] + all_categories
+        selected_category = st.selectbox(
+            "Filter by Category:",
+            category_options,
+            index=category_options.index(st.session_state.selected_category),
+            key="category_filter"
+        )
+        st.session_state.selected_category = selected_category
+    
+    with col3:
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("Clear Filters", use_container_width=True):
+            # Clear both custom state and widget keys
+            st.session_state.selected_techs = []
+            st.session_state.selected_category = "All"
+            if 'tech_filter' in st.session_state:
+                del st.session_state['tech_filter']
+            if 'category_filter' in st.session_state:
+                del st.session_state['category_filter']
+            st.rerun()
+    
+    # Filter projects
+    filtered_projects = projects
+    
+    # Filter by category
+    if selected_category != "All":
+        filtered_projects = [p for p in filtered_projects if p['category'] == selected_category]
+    
+    # Filter by technology
+    if selected_techs:
+        filtered_projects = [
+            p for p in filtered_projects 
+            if any(tech in p['technologies'] for tech in selected_techs)
+        ]
+    
+    # Show project count
+    st.markdown(f"**Showing {len(filtered_projects)} of {len(projects)} projects**")
+    st.markdown("---")
+    
+    # Create project cards
+    if filtered_projects:
+        for project in filtered_projects:
+            with st.container():
+                st.markdown(f'<div class="project-card">', unsafe_allow_html=True)
                 
-                # Technologies used
-                if project['technologies']:
-                    tech_badges = " ".join([f"`{tech}`" for tech in project['technologies']])
-                    st.markdown(f"**Technologies:** {tech_badges}")
-            
-            with col2:
-                if project['github_link']:
-                    st.link_button("View on GitHub", project['github_link'])
-                if project['live_link']:
-                    st.link_button("Live Demo", project['live_link'])
-            
-            st.markdown('</div>', unsafe_allow_html=True)
-            st.markdown("---")
+                col1, col2 = st.columns([3, 1])
+                
+                with col1:
+                    st.markdown(f"### {project['title']}")
+                    st.markdown(f"**Category:** {project['category']}")
+                    st.markdown(project['description'])
+                    
+                    # Technologies used
+                    if project['technologies']:
+                        tech_badges = " ".join([f"`{tech}`" for tech in project['technologies']])
+                        st.markdown(f"**Technologies:** {tech_badges}")
+                
+                with col2:
+                    if project['github_link']:
+                        st.link_button("View on GitHub", project['github_link'])
+                    if project['live_link']:
+                        st.link_button("Live Demo", project['live_link'])
+                
+                st.markdown('</div>', unsafe_allow_html=True)
+                st.markdown("---")
+    else:
+        st.info("No projects match the selected filters. Try selecting different options.")
 
 def show_contact():
     """Contact form section"""
