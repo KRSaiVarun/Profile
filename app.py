@@ -8,6 +8,7 @@ from PIL import Image
 from data.skills_data import get_skills_data
 from data.projects_data import get_projects_data
 from data.blog_data import get_blog_posts, get_blog_post_by_id, get_blog_categories, get_recent_posts
+from data.testimonials_data import get_testimonials, get_featured_testimonials, get_average_rating
 from utils.email_handler import send_email
 
 # Page configuration
@@ -91,6 +92,33 @@ st.markdown("""
         margin-right: 8px;
         display: inline-block;
     }
+    .testimonial-card {
+        background-color: #12141a;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        margin: 15px 0;
+        position: relative;
+    }
+    .testimonial-quote {
+        font-style: italic;
+        color: #e6eef8;
+        margin: 15px 0;
+        line-height: 1.6;
+    }
+    .testimonial-author {
+        font-weight: 600;
+        color: #4A90E2;
+        margin-top: 15px;
+    }
+    .testimonial-role {
+        color: #a9b3c3;
+        font-size: 0.9rem;
+    }
+    .star-rating {
+        color: #ffd43b;
+        font-size: 1.2rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -168,7 +196,7 @@ def main():
     st.sidebar.title("🚀 Navigation")
     page = st.sidebar.selectbox(
         "Go to section:",
-        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📝 Blog", "📧 Contact"]
+        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📝 Blog", "⭐ Testimonials", "📧 Contact"]
     )
     
     # Main content based on selected page
@@ -182,6 +210,8 @@ def main():
         show_projects()
     elif page == "📝 Blog":
         show_blog()
+    elif page == "⭐ Testimonials":
+        show_testimonials()
     elif page == "📧 Contact":
         show_contact()
 
@@ -507,6 +537,48 @@ def show_blog_post(post_id):
     if st.button("← Back to Blog", key="back_bottom"):
         st.session_state.selected_post_id = None
         st.rerun()
+
+def show_testimonials():
+    """Testimonials and recommendations section"""
+    st.markdown('<h2 class="section-header">⭐ Testimonials & Recommendations</h2>', unsafe_allow_html=True)
+    
+    testimonials = get_testimonials()
+    avg_rating = get_average_rating()
+    
+    # Display stats
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total Reviews", len(testimonials))
+    with col2:
+        st.metric("Average Rating", f"{avg_rating}/5")
+    with col3:
+        five_star = sum(1 for t in testimonials if t['rating'] == 5)
+        st.metric("5-Star Reviews", five_star)
+    
+    st.markdown("---")
+    
+    # Display testimonials in a grid
+    for i in range(0, len(testimonials), 2):
+        cols = st.columns(2)
+        
+        for j, col in enumerate(cols):
+            if i + j < len(testimonials):
+                testimonial = testimonials[i + j]
+                with col:
+                    st.markdown('<div class="testimonial-card">', unsafe_allow_html=True)
+                    
+                    # Star rating
+                    stars = "⭐" * testimonial['rating']
+                    st.markdown(f'<div class="star-rating">{stars}</div>', unsafe_allow_html=True)
+                    
+                    # Quote
+                    st.markdown(f'<div class="testimonial-quote">"{testimonial["text"]}"</div>', unsafe_allow_html=True)
+                    
+                    # Author info
+                    st.markdown(f'<div class="testimonial-author">{testimonial["name"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="testimonial-role">{testimonial["role"]}, {testimonial["company"]}</div>', unsafe_allow_html=True)
+                    
+                    st.markdown('</div>', unsafe_allow_html=True)
 
 def show_contact():
     """Contact form section"""
