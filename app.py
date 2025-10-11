@@ -7,6 +7,7 @@ import os
 from PIL import Image
 from data.skills_data import get_skills_data
 from data.projects_data import get_projects_data
+from data.blog_data import get_blog_posts, get_blog_post_by_id, get_blog_categories, get_recent_posts
 from utils.email_handler import send_email
 
 # Page configuration
@@ -63,6 +64,32 @@ st.markdown("""
         padding: 25px;
         border-radius: 10px;
         border: 1px solid rgba(255,255,255,0.1);
+    }
+    .blog-card {
+        background-color: #12141a;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        margin: 15px 0;
+        transition: transform 0.2s;
+    }
+    .blog-card:hover {
+        transform: translateY(-2px);
+        border-color: #4A90E2;
+    }
+    .blog-meta {
+        color: #a9b3c3;
+        font-size: 0.9rem;
+        margin: 10px 0;
+    }
+    .blog-tag {
+        background-color: rgba(74, 144, 226, 0.2);
+        color: #4A90E2;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        margin-right: 8px;
+        display: inline-block;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -141,7 +168,7 @@ def main():
     st.sidebar.title("🚀 Navigation")
     page = st.sidebar.selectbox(
         "Go to section:",
-        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📧 Contact"]
+        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📝 Blog", "📧 Contact"]
     )
     
     # Main content based on selected page
@@ -153,6 +180,8 @@ def main():
         show_skills()
     elif page == "💼 Projects":
         show_projects()
+    elif page == "📝 Blog":
+        show_blog()
     elif page == "📧 Contact":
         show_contact()
 
@@ -372,6 +401,112 @@ def show_projects():
                 st.markdown("---")
     else:
         st.info("No projects match the selected filters. Try selecting different options.")
+
+def show_blog():
+    """Blog section with posts listing and detail view"""
+    st.markdown('<h2 class="section-header">📝 Blog</h2>', unsafe_allow_html=True)
+    
+    # Initialize session state for blog navigation
+    if 'selected_post_id' not in st.session_state:
+        st.session_state.selected_post_id = None
+    
+    # If a post is selected, show the post detail
+    if st.session_state.selected_post_id:
+        show_blog_post(st.session_state.selected_post_id)
+        return
+    
+    # Get blog posts
+    posts = get_blog_posts()
+    categories = get_blog_categories()
+    
+    # Category filter
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        selected_category = st.selectbox(
+            "Filter by Category:",
+            ["All"] + categories,
+            key="blog_category_filter"
+        )
+    
+    # Filter posts by category
+    filtered_posts = posts
+    if selected_category != "All":
+        filtered_posts = [p for p in posts if p['category'] == selected_category]
+    
+    with col2:
+        st.markdown("<br>", unsafe_allow_html=True)
+        if selected_category == "All":
+            st.markdown(f"**{len(filtered_posts)} Posts**")
+        else:
+            st.markdown(f"**{len(filtered_posts)} of {len(posts)} Posts**")
+    
+    st.markdown("---")
+    
+    # Display blog posts as cards
+    for post in filtered_posts:
+        with st.container():
+            st.markdown('<div class="blog-card">', unsafe_allow_html=True)
+            
+            # Post title
+            st.markdown(f"### {post['title']}")
+            
+            # Post metadata
+            st.markdown(f'<div class="blog-meta">📅 {post["date"]} | 👤 {post["author"]} | 📂 {post["category"]}</div>', unsafe_allow_html=True)
+            
+            # Post excerpt
+            st.markdown(post['excerpt'])
+            
+            # Tags
+            if post['tags']:
+                tags_html = "".join([f'<span class="blog-tag">{tag}</span>' for tag in post['tags']])
+                st.markdown(tags_html, unsafe_allow_html=True)
+            
+            # Read more button
+            col1, col2, col3 = st.columns([1, 1, 3])
+            with col1:
+                if st.button("Read More →", key=f"read_{post['id']}", use_container_width=True):
+                    st.session_state.selected_post_id = post['id']
+                    st.rerun()
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown("---")
+
+def show_blog_post(post_id):
+    """Display a single blog post"""
+    post = get_blog_post_by_id(post_id)
+    
+    if not post:
+        st.error("Post not found!")
+        if st.button("← Back to Blog"):
+            st.session_state.selected_post_id = None
+            st.rerun()
+        return
+    
+    # Back button
+    if st.button("← Back to Blog"):
+        st.session_state.selected_post_id = None
+        st.rerun()
+    
+    # Post header
+    st.markdown(f"# {post['title']}")
+    st.markdown(f'<div class="blog-meta">📅 {post["date"]} | 👤 {post["author"]} | 📂 {post["category"]}</div>', unsafe_allow_html=True)
+    
+    # Tags
+    if post['tags']:
+        tags_html = "".join([f'<span class="blog-tag">{tag}</span>' for tag in post['tags']])
+        st.markdown(tags_html, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Post content (markdown)
+    st.markdown(post['content'])
+    
+    st.markdown("---")
+    
+    # Back button at the bottom
+    if st.button("← Back to Blog", key="back_bottom"):
+        st.session_state.selected_post_id = None
+        st.rerun()
 
 def show_contact():
     """Contact form section"""
