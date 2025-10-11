@@ -10,6 +10,10 @@ from data.projects_data import get_projects_data
 from data.blog_data import get_blog_posts, get_blog_post_by_id, get_blog_categories, get_recent_posts
 from data.testimonials_data import get_testimonials, get_featured_testimonials, get_average_rating
 from utils.email_handler import send_email
+from utils.analytics import (
+    load_analytics, get_total_views, get_page_view_trends, 
+    get_popular_pages, get_popular_projects, get_engagement_stats, get_recent_activity
+)
 
 # Page configuration
 st.set_page_config(
@@ -196,7 +200,7 @@ def main():
     st.sidebar.title("🚀 Navigation")
     page = st.sidebar.selectbox(
         "Go to section:",
-        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📝 Blog", "⭐ Testimonials", "📧 Contact"]
+        ["🏠 Home", "👨‍💻 About", "🔧 Skills", "💼 Projects", "📝 Blog", "⭐ Testimonials", "📊 Analytics", "📧 Contact"]
     )
     
     # Main content based on selected page
@@ -212,6 +216,8 @@ def main():
         show_blog()
     elif page == "⭐ Testimonials":
         show_testimonials()
+    elif page == "📊 Analytics":
+        show_analytics()
     elif page == "📧 Contact":
         show_contact()
 
@@ -579,6 +585,99 @@ def show_testimonials():
                     st.markdown(f'<div class="testimonial-role">{testimonial["role"]}, {testimonial["company"]}</div>', unsafe_allow_html=True)
                     
                     st.markdown('</div>', unsafe_allow_html=True)
+
+def show_analytics():
+    """Analytics dashboard section"""
+    st.markdown('<h2 class="section-header">📊 Analytics Dashboard</h2>', unsafe_allow_html=True)
+    
+    st.info("📈 This dashboard shows simulated portfolio analytics for demonstration purposes.")
+    
+    # Get analytics data
+    engagement = get_engagement_stats()
+    recent = get_recent_activity(7)
+    
+    # Key metrics
+    st.markdown("### 📈 Key Metrics")
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Total Views", f"{engagement['total_views']:,}")
+    with col2:
+        st.metric("Contact Submissions", engagement['contact_submissions'])
+    with col3:
+        st.metric("Resume Downloads", engagement['resume_downloads'])
+    with col4:
+        st.metric("Last 7 Days", f"{recent['total']:,}")
+    
+    st.markdown("---")
+    
+    # Page views over time
+    st.markdown("### 📅 Page Views Over Time (Last 30 Days)")
+    
+    trends = get_page_view_trends()
+    df_trends = pd.DataFrame(trends)
+    
+    # Create line chart
+    fig_trends = px.line(
+        df_trends,
+        x='date',
+        y=['home', 'about', 'skills', 'projects', 'blog', 'testimonials', 'contact'],
+        title="Daily Page Views",
+        labels={'value': 'Views', 'variable': 'Page', 'date': 'Date'}
+    )
+    fig_trends.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font_color='#e6eef8',
+        hovermode='x unified'
+    )
+    st.plotly_chart(fig_trends, use_container_width=True)
+    
+    st.markdown("---")
+    
+    # Popular pages and projects
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("### 🏆 Most Popular Pages")
+        popular_pages = get_popular_pages()
+        
+        for page, views in popular_pages[:5]:
+            st.markdown(f"**{page.title()}**: {views:,} views")
+            progress = views / popular_pages[0][1] if popular_pages else 0
+            st.progress(progress)
+    
+    with col2:
+        st.markdown("### 💼 Most Popular Projects")
+        popular_projects = get_popular_projects()
+        
+        for project, views in popular_projects[:5]:
+            st.markdown(f"**{project}**: {views:,} views")
+            progress = views / popular_projects[0][1] if popular_projects else 0
+            st.progress(progress)
+    
+    st.markdown("---")
+    
+    # Engagement breakdown
+    st.markdown("### 🎯 Engagement Breakdown")
+    
+    # Create pie chart for page distribution
+    page_data = get_popular_pages()
+    df_pages = pd.DataFrame(page_data, columns=['Page', 'Views'])
+    
+    fig_pie = px.pie(
+        df_pages,
+        values='Views',
+        names='Page',
+        title='Page View Distribution',
+        color_discrete_sequence=px.colors.sequential.Blues_r
+    )
+    fig_pie.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font_color='#e6eef8'
+    )
+    st.plotly_chart(fig_pie, use_container_width=True)
 
 def show_contact():
     """Contact form section"""
