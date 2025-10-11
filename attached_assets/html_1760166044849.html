@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- =====BOX ICONS===== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+        // Replace with your actual EmailJS public key
+        emailjs.init("YOUR_PUBLIC_KEY_HERE");
+      })();
+    </script>
+
+    <title>Portfolio website | KR Sai Varun</title>
+  </head>
+  <body>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div>
+          <a href="#" class="nav__logo">Sai Varun</a>
+        </div>
+
+        <!-- Visible palette swatch button -->
+        <div class="nav__controls">
+          
+        </div>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
+              <a href="#skills" class="nav__link">Skills</a>
+            </li>
+            <li class="nav__item">
+              <a href="#work" class="nav__link">Projects</a>
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-menu"></i>
+        </div>
+      </nav>
+    </header>
+
+    <main class="l-main">
+      <!--===== HOME =====-->
+      <section class="home bd-grid" id="home">
+        <div class="home__data">
+          <h1 class="home__title">
+            Hi,<br />I'm <span class="home__title-color">Sai Varun</span><br />
+            Full Stack Developer & Data Analyst
+          </h1>
+
+          <a href="#contact" class="button">Contact</a>
+        </div>
+
+        <div class="home__social">
+          <a href="https://www.linkedin.com/in/kr-r-sai-varun-891788262" class="home__social-icon"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://github.com/krsaivarun" class="home__social-icon"><i class="bx bxl-github"></i></a>
+        </div>
+
+        <div class="home__img">
+          <svg
+            class="home__blob"
+            viewBox="0 0 479 467"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <mask id="mask0" mask-type="alpha">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+            </mask>
+            <g mask="url(#mask0)">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+              <image
+                class="home__blob-img"
+                x="50"
+                y="60"
+                href="assets/img/profile.jpg"
+              />
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <!--===== ABOUT =====-->
+      <section class="about section" id="about">
+        <h2 class="section-title">About</h2>
+
+        <div class="about__container bd-grid">
+          <div class="about__img">
+            <img src="assets/img/profile.jpg" alt="KR Sai Varun" />
+          </div>
+
+          <div>
+            <h2 class="about__subtitle">I'm KR Sai Varun</h2>
+            <p class="about__text">
+              Motivated BCA student (2022–2025, 80% aggregate) with expertise in Excel, Power BI, and full stack development. 
+              Skilled in data visualization, reporting, and dashboards, alongside strong web development experience. 
+              Effective communicator with proven teamwork, problem-solving, and presentation skills, seeking to contribute 
+              in data analysis and full stack roles.
+            </p>
+            <p class="about__text">
+              <strong>Education:</strong><br>
+              • BCA – Mewa Vanguard College, Bangalore (2022–2025) | 80%<br>
+              • Pre-University – Sri Krishna Degree College (2022) | 55%<br>
+              • Secondary – VET School VV Puram (2020) | 60%
+            </p>
+            <p class="about__text">
+              <strong>Experience:</strong><br>
+              • Full Stack Web Development Intern – NICT Computer Education (May 2024 – Sep 2025)<br>
+              - Built a CRUD blog platform using Flask & SQLite<br>
+              - Designed responsive UIs with HTML, CSS, JavaScript<br>
+              - Managed SQL operations for dynamic content<br>
+              - Used Excel for task tracking and reporting<br>
+              - Collaborated with team members to deliver project milestones
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!--===== SKILLS =====-->
+      <section class="skills section" id="skills">
+        <h2 class="section-title">Skills</h2>
+
+        <div class="skills__container bd-grid">
+          <div>
+            <h2 class="skills__subtitle">Technical Skills</h2>
+            <p class="skills__text">
+              I have expertise in various technologies and tools for full stack development and data analysis.
+            </p>
+            
+            <h3 class="skills__category">Data Tools</h3>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxs-spreadsheet skills__icon"></i>
+                <span class="skills__name">MS Excel</span>
+              </div>
+              <div class="skills__bar skills__excel"></div>
+              <div>
+                <span class="skills__percentage">90%</span>
+              </div>
+            </div>
+            
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bx-bar-chart-alt skills__icon"></i>
+                <span class="skills__name">Power BI</span>
+              </div>
+              <div class="skills__bar skills__powerbi"></div>
+              <div>
+                <span class="skills__percentage">88%</span>
+              </div>
+            </div>
+            
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-python skills__icon"></i>
+                <span class="skills__name">Pandas</span>
+              </div>
+              <div class="skills__bar skills__pandas"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bx-line-chart skills__icon"></i>
+                <span class="skills__name">Tableau</span>
+              </div>
+              <div class="skills__bar skills__tableau"></div>
+              <div>
+                <span class="skills__percentage">80%</span>
+              </div>
+            </div>
+            
+            <h3 class="skills__category">Programming Languages</h3>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-python skills__icon"></i>
+                <span class="skills__name">Python</span>
+              </div>
+              <div class="skills__bar skills__python"></div>
+              <div>
+                <span class="skills__percentage">87%</span>
+              </div>
+            </div>
+            
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-javascript skills__icon"></i>
+                <span class="skills__name">JavaScript</span>
+              </div>
+              <div class="skills__bar skills__js"></div>
+              <div>
+                <span class="skills__percentage">85%</span>
+              </div>
+            </div>
+            
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-java skills__icon"></i>
+                <span class="skills__name">Java</span>
+              </div>
+              <div class="skills__bar skills__java"></div>
+              <div>
+                <span class="skills__percentage">80%</span>
+              </div>
+            </div>
+            
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bx-data skills__icon"></i>
+                <span class="skills__name">SQL</span>
+              </div>
+              <div class="skills__bar skills__sql"></div>
+              <div>
+                <span class="skills__percentage">87%</span>
+              </div>
+            </div>
+
+            <h3 class="skills__category">Web Development</h3>
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-html5 skills__icon"></i>
+                <span class="skills__name">HTML5</span>
+              </div>
+              <div class="skills__bar skills__html"></div>
+              <div>
+                <span class="skills__percentage">90%</span>
+              </div>
+            </div>
+
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-css3 skills__icon"></i>
+                <span class="skills__name">CSS3</span>
+              </div>
+              <div class="skills__bar skills__css"></div>
+              <div>
+                <span class="skills__percentage">88%</span>
+              </div>
+            </div>
+
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-react skills__icon"></i>
+                <span class="skills__name">React</span>
+              </div>
+              <div class="skills__bar skills__react"></div>
+              <div>
+                <span class="skills__percentage">80%</span>
+              </div>
+            </div>
+
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-nodejs skills__icon"></i>
+                <span class="skills__name">Node.js</span>
+              </div>
+              <div class="skills__bar skills__node"></div>
+              <div>
+                <span class="skills__percentage">80%</span>
+              </div>
+            </div>
+
+            <div class="skills__data">
+              <div class="skills__names">
+                <i class="bx bxl-mongodb skills__icon"></i>
+                <span class="skills__name">MongoDB</span>
+              </div>
+              <div class="skills__bar skills__mongodb"></div>
+              <div>
+                <span class="skills__percentage">80%</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <img src="assets/img/work3.jpg" alt="" class="skills__img" />
+          </div>
+        </div>
+      </section>
+
+      <!--===== WORK =====-->
+      <section class="work section" id="work">
+        <h2 class="section-title">Projects</h2>
+
+        <div class="work__container bd-grid">
+          <div class="work__item">
+            <h3 class="work__title">DatainsightHub</h3>
+            <p class="work__description">Excel & Power BI Dashboard with automated analysis & AI-driven insights</p>
+            <a href="https://github.com/KRSaiVarun/DatainsightHub" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+          
+          <div class="work__item">
+            <h3 class="work__title">Vayu Vihar</h3>
+            <p class="work__description">Real-time helicopter booking web app</p>
+            <a href="https://github.com/KRSaiVarun/Vayu-Vihar" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+          
+          <div class="work__item">
+            <h3 class="work__title">FlaskBlog</h3>
+            <p class="work__description">CRUD blog app with Flask + SQLite</p>
+            <a href="https://github.com/KRSaiVarun/FlaskBlog" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+          
+          <div class="work__item">
+            <h3 class="work__title">CyberScan-Pro</h3>
+            <p class="work__description">Python-based vulnerability scanner using Nmap & OSINT APIs</p>
+            <a href="https://github.com/KRSaiVarun/CyberScan-Pro" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+          
+          <div class="work__item">
+            <h3 class="work__title">LoanGuardian-AI</h3>
+            <p class="work__description">Loan default prediction app (Streamlit)</p>
+            <a href="https://github.com/KRSaiVarun/LoanGuardian-AI" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+          
+          <div class="work__item">
+            <h3 class="work__title">Datainsight Hub Pro</h3>
+            <p class="work__description">React dashboard with Chart.js & animations</p>
+            <a href="https://github.com/KRSaiVarun/Datainsight-Hub-Pro" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Portfolio Website</h3>
+            <p class="work__description">Responsive personal portfolio website</p>
+            <a href="https://github.com/KRSaiVarun/Portfolio-Website" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">E-Commerce Analytics Dashboard</h3>
+            <p class="work__description">Power BI dashboard for e-commerce sales analysis</p>
+            <a href="https://github.com/KRSaiVarun/E-Commerce-Analytics" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Task Management System</h3>
+            <p class="work__description">Full-stack task management application</p>
+            <a href="https://github.com/KRSaiVarun/Task-Management-System" class="work__link" target="_blank">
+              <i class="bx bxl-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!--===== CONTACT =====-->
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Contact</h2>
+
+        <div class="contact__container bd-grid">
+          <div class="contact__info">
+            <h3 class="contact__subtitle">Get in Touch</h3>
+            <p class="contact__text">
+              <i class='bx bx-current-location'></i> Bangalore, India<br>
+              <i class='bx bx-phone'></i> +91 8618266736<br>
+              <i class='bx bx-envelope'></i> krsaivarun@gmail.com
+            </p>
+            <div class="contact__social">
+              <a href="https://linkedin.com/in/kr-r-sai-varun-891788262" class="contact__social-icon"><i class="bx bxl-linkedin"></i></a>
+              <a href="https://github.com/krsaivarun" class="contact__social-icon"><i class="bx bxl-github"></i></a>
+            </div>
+          </div>
+          
+          <form id="contact-form" class="contact__form">
+            <input type="text" name="from_name" placeholder="Name" class="contact__input" required />
+            <input type="email" name="from_email" placeholder="Email" class="contact__input" required />
+            <textarea
+              name="message"
+              cols="0"
+              rows="10"
+              class="contact__input"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <button type="submit" class="contact__button button">Send Message</button>
+            <div id="form-message" class="form-message"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!--===== FOOTER =====-->
+    <footer class="footer">
+      <p class="footer__title">KR Sai Varun</p>
+      <div class="footer__social">
+  <a href="https://www.linkedin.com/in/kr-r-sai-varun-891788262" class="footer__icon"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://github.com/krsaivarun" class="footer__icon"><i class="bx bxl-github"></i></a>
+      </div>
+      <p class="footer__copy">&#169; All rights reserved</p>
+    </footer>
+
+    <!--===== SCROLL REVEAL =====-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--===== MAIN JS =====-->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Improved EmailJS Script -->
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        const messageDiv = document.getElementById('form-message');
+        
+        // Change button text to indicate sending
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        messageDiv.textContent = '';
+        messageDiv.style.color = '';
+        
+        // Send email using EmailJS
+        emailjs.sendForm(
+          'YOUR_SERVICE_ID',     // Replace with your EmailJS Service ID
+          'YOUR_TEMPLATE_ID',    // Replace with your EmailJS Template ID
+          this
+        )
+        .then(function() {
+          messageDiv.textContent = '✅ Message sent successfully! I\'ll get back to you soon.';
+          messageDiv.style.color = 'green';
+          document.getElementById('contact-form').reset();
+          
+          // Show success toast if available
+          if (typeof showToast === 'function') {
+            showToast('Message sent successfully!');
+          }
+        }, function(error) {
+          console.error('EmailJS Error:', error);
+          messageDiv.textContent = 'Failed to send message. Please email me directly at krsaivarun@gmail.com';
+          messageDiv.style.color = 'red';
+          
+          // Show error toast if available
+          if (typeof showToast === 'function') {
+            showToast('Failed to send message. Please try email.');
+          }
+        })
+        .finally(function() {
+          submitButton.textContent = 'Send Message';
+          submitButton.disabled = false;
+        });
+      });
+    </script>
+  </body>
+</html>
