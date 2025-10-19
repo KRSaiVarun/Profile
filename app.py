@@ -232,7 +232,8 @@ def show_home():
         # Profile image
         image = load_profile_image()
         if image:
-            st.image(image, width=300, use_column_width=False)
+            # prefer use_container_width instead of deprecated use_column_width
+            st.image(image, use_container_width=False)
         
         st.markdown("""
         **Motivated BCA student** with expertise in Excel, Power BI, and full stack development. 
@@ -245,7 +246,7 @@ def show_home():
             <a href="https://github.com/krsaivarun" target="_blank">
                 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
             </a>
-            <a href="https://www.linkedin.com/in/kr-r-sai-varun-891788262" target="_blank">
+            <a href="https://www.linkedin.com/in/k-r-sai-varun-891788262/" target="_blank">
                 <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
             </a>
         </div>
@@ -259,12 +260,12 @@ def show_about():
     st.markdown('<h2 class="section-header">About Me</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns([1, 2])
-    
+
     with col1:
         image = load_profile_image()
         if image:
-            st.image(image, use_column_width=True)
-    
+            st.image(image, use_container_width=True)
+
     with col2:
         st.markdown("### I'm KR Sai Varun")
         st.markdown("""
@@ -723,7 +724,7 @@ def show_contact():
             <a href="https://github.com/krsaivarun" target="_blank" style="text-decoration: none;">
                 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
             </a>
-            <a href="https://www.linkedin.com/in/kr-r-sai-varun-891788262" target="_blank" style="text-decoration: none;">
+            <a href="https://www.linkedin.com/in/k-r-sai-varun-891788262/" target="_blank" style="text-decoration: none;">
                 <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
             </a>
         </div>
